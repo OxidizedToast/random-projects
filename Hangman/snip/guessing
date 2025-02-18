@@ -1,0 +1,57 @@
+void guessing(std::string answer_to_game){
+  int lifes = 7;
+  char guess;
+  std::vector<char> wrong_letters;
+  std::vector<char> correct_letters;
+  system("clear");
+  std::cout << "The word is " << answer_to_game.length() << " letters long" << std::endl;
+  std::cout << "You have " << lifes << " lifes";
+  std::cout << "start guessing!" << std::endl;
+  ////////////////////////////////
+  // REMOVE ONCE TESTING IS DONE//
+  ////////////////////////////////
+  std::cout << answer_to_game;
+  int letters = answer_to_game.length();
+  bool found = false;
+
+  while (lifes > 0 && found != true){
+    std::cin >> guess;
+
+    for (int i = 0; i < answer_to_game.length(); i++){
+      if (guess == answer_to_game[i]){
+          std::cout << guess << " was found in: " << i << std::endl; 
+          found = true;
+          correct_letters.push_back(guess);
+          if (answer_to_game.size() == correct_letters.size()){
+            found = true;
+            break;
+          }
+      }     
+    } 
+    if (!found) {
+      std::cout << guess << " isn't found in the word" << std::endl;
+      lifes--;
+      std::cout << "You have " << lifes << " lifes remaining" << std::endl;
+      wrong_letters.push_back(guess);
+      std::cout << "Incorrect guesses are: ";
+      for (char wrong : wrong_letters){
+        std::cout << wrong << " ";
+      }
+      std::cout << " " << std::endl;
+    }
+  }
+  if (lifes == 0){
+    system("clear");
+    std::cout << "Game over!" << std::endl;
+    std::cout << "You lose!" << std::endl;
+    std::cout << "The correct answer was: " << answer_to_game << std::endl;
+    exit(0);
+  } if (found == true){
+      system("clear");
+      std::cout << "You win!" << std::endl;
+      std::cout << "The word was: " << answer_to_game << std::endl;
+      exit(0);
+  } 
+}
+
+
